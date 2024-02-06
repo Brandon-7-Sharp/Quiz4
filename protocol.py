@@ -1,27 +1,34 @@
-from abc import ABC, abstractmethod
+from typing import Protocol
 import argparse as ap
-# from dataclasses import dataclass
+import os
 
-# @dataclass
-class Star:
-    @abstractmethod
-    def Explode() -> None:
+class Star(Protocol):
+    def Explode(self) -> None:
         pass
     
-    @abstractmethod
-    def Implode() -> None:
+    def Implode(self) -> None:
         pass
 
-# @dataclass
-class Planet(Star):
+class Planet:
+    def __init__(self,filename:str) -> None:
+        self.filename = filename
+
+    def save(self,data:str) -> None:
+        with open(self.filename,"w") as file:
+            file.write(data)
+
+    def load(self)->str:
+        with open(self.filename,"r") as file:
+            return file.read()
+
+
     def Explode(self) -> None:
         print("This Planet Has Exploded")
     
     def Implode(self) -> None:
         print("This Planet Has Imploded")
 
-# @dataclass
-class Moon(Star):
+class Moon:
     def Explode(self) -> None:
         print("This Moon Has Exploded")
     
@@ -30,7 +37,6 @@ class Moon(Star):
 
 
 def main():
-
     parser = ap.ArgumentParser()
     parser.add_argument(dest='Terra', help='1 = Explode, 2 = Implode', type=int)
     parser.add_argument(dest='Luna', help='1 = Explode, 2 = Implode', type=int)
@@ -40,11 +46,21 @@ def main():
     planet=args.Terra
     moon=args.Luna
 
-    terra = Planet()
+    data = ""
+
+    terra = Planet("data_1.txt")
     if (planet == 1):
         terra.Explode()
+        data = "Dynamite"
     else:
         terra.Implode()
+        data = "TNT"
+
+    star_check : Star = Planet("data_1.txt")
+    star_check.save(data)
+
+    loaded_data = star_check.load()
+    print("Cause of Planet Destruction: ", loaded_data)
 
     luna = Moon()
     if (moon == 1):

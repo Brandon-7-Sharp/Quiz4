@@ -3,7 +3,7 @@ from abc import ABC
 
 class Clown:
     def __init__(self):
-        self._makeup = "On"
+        self._makeup = "Off"
 
     def get_makeup(self) -> str:
         return self._makeup

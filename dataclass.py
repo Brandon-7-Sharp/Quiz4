@@ -19,6 +19,7 @@ def main():
     print("Mass: " + str(sol.mass))
     print("Diameter: " + str(sol.diameter))
 
+    print()
     sol.implode()
 
     print("Name: " + sol.name)
