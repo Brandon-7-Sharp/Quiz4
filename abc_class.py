@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 # from dataclasses import dataclass
 
-# @dataclass
 class Star:
     @abstractmethod
     def Explode() -> None:
@@ -11,7 +10,6 @@ class Star:
     def Implode() -> None:
         pass
 
-# @dataclass
 class Planet(Star):
     def Explode(self) -> None:
         print("This Planet Has Exploded")
@@ -19,7 +17,6 @@ class Planet(Star):
     def Implode(self) -> None:
         print("This Planet Has Imploded")
 
-# @dataclass
 class Moon(Star):
     def Explode(self) -> None:
         print("This Moon Has Exploded")
